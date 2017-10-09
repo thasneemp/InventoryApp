@@ -36,7 +36,7 @@ public class InventoryProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Cursor query(@NonNull Uri uri, @Nullable String[] strings, @Nullable String s, @Nullable String[] strings1, @Nullable String s1) {
+    public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
 
         int match = uriMatcher.match(uri);
 
@@ -44,10 +44,12 @@ public class InventoryProvider extends ContentProvider {
         Cursor cursor = null;
         switch (match) {
             case InventoryContract.PRODUCT:
-                cursor = readableDatabase.query(InventoryContract.InventoryTable.PRODUCT_TABLE, strings, s, strings1, s1, null, null);
+                cursor = readableDatabase.query(InventoryContract.InventoryTable.PRODUCT_TABLE, projection, selection, selectionArgs, sortOrder, null, null);
                 break;
             case InventoryContract.PRODUCT_ID:
-                cursor = readableDatabase.query(InventoryContract.InventoryTable.PRODUCT_TABLE, strings, s, strings1, s1, null, null);
+                selection = InventoryContract.InventoryTable.ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                cursor = readableDatabase.query(InventoryContract.InventoryTable.PRODUCT_TABLE, projection, selection, selectionArgs, sortOrder, null, null);
                 break;
         }
 

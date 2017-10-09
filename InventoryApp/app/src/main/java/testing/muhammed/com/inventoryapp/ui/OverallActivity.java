@@ -94,16 +94,19 @@ public class OverallActivity extends AppCompatActivity implements View.OnClickLi
         Toast.makeText(this, "" + currentQuantity, Toast.LENGTH_SHORT).show();
         ContentValues values = new ContentValues();
         values.put(InventoryContract.InventoryTable.QUANTITY, currentQuantity - 1);
-        int update = getContentResolver().update(Uri.withAppendedPath(InventoryContract.INVENTORY_PRODUCT_ID, "" + id), values, InventoryContract.InventoryTable.ID + "=?", new String[]{String.valueOf(id)});
-        Toast.makeText(this, "" + update, Toast.LENGTH_SHORT).show();
+        int update = getContentResolver().update(Uri.withAppendedPath(InventoryContract.INVENTORY_PRODUCT_ID, "" + id),
+                values, InventoryContract.InventoryTable.ID + "=?", new String[]{String.valueOf(id)});
 
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Cursor cursor = (Cursor) adapterView.getItemAtPosition(i);
-
         int obj = cursor.getInt(cursor.getColumnIndex(InventoryContract.InventoryTable.ID));
-        Toast.makeText(this, "" + obj, Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(InventoryContract.InventoryTable.ID, obj);
+        startActivity(intent);
+
     }
 }
