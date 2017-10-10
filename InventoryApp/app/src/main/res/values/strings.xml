@@ -2,11 +2,14 @@
     <string name="app_name">InventoryApp</string>
     <string name="add_new_product">Add new product</string>
     <string name="sale">Sale</string>
-    <string name="order">Order</string>
+    <string name="order">Order more</string>
     <string name="delete">Delete</string>
     <string name="price">Price</string>
     <string name="quantity">Quantity</string>
     <string name="name">Name</string>
     <string name="add">Add</string>
     <string name="add_image">Add Image</string>
+    <string name="quantitity_error">Quantity must be 0 or greater</string>
+    <string name="success_message_for_delete">Successfully deleted the record</string>
+    <string name="email_subject">Inventory Order</string>
 </resources>

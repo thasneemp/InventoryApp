@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.OverallActivity">
+        <activity
+            android:name=".ui.OverallActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,8 +28,12 @@
             android:authorities="com.inventory.app"
             android:exported="false" />
 
-        <activity android:name=".ui.DetailActivity" />
-        <activity android:name=".ui.AddProductActivity"></activity>
+        <activity
+            android:name=".ui.DetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.AddProductActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

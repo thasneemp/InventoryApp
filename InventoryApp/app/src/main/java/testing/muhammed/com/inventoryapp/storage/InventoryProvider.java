@@ -87,10 +87,22 @@ public class InventoryProvider extends ContentProvider {
     }
 
     @Override
-    public int delete(@NonNull Uri uri, @Nullable String s, @Nullable String[] strings) {
+    public int delete(@NonNull Uri uri, @Nullable String where, @Nullable String[] whereArgs) {
 
+        SQLiteDatabase deleteDatabase = database.getWritableDatabase();
 
-        return 0;
+        int match = uriMatcher.match(uri);
+        switch (match) {
+            case InventoryContract.PRODUCT:
+                getContext().getContentResolver().notifyChange(uri, null);
+                return deleteDatabase.delete(InventoryContract.InventoryTable.PRODUCT_TABLE, where, whereArgs);
+            case InventoryContract.PRODUCT_ID:
+                where = InventoryContract.InventoryTable.ID + "=?";
+                whereArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                getContext().getContentResolver().notifyChange(uri, null);
+                return deleteDatabase.delete(InventoryContract.InventoryTable.PRODUCT_TABLE, where, whereArgs);
+        }
+        return -1;
     }
 
     @Override
