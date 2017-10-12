@@ -93,19 +93,24 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
 
                 if (name.length() <= 0) {
                     Toast.makeText(this, "Enter product name", Toast.LENGTH_SHORT).show();
+
                 } else if (quantity.length() <= 0) {
                     Toast.makeText(this, "Enter quantity", Toast.LENGTH_SHORT).show();
+
                 } else if (price.length() <= 0) {
                     Toast.makeText(this, "Please enter the price", Toast.LENGTH_SHORT).show();
+
                 } else if (Integer.parseInt(quantity) < 0) {
                     this.quantity = 0;
                     Toast.makeText(this, "Please enter a valid quantity", Toast.LENGTH_SHORT).show();
+
                 } else {
                     ContentValues values = new ContentValues();
                     values.put(InventoryContract.InventoryTable.NAME, name);
                     values.put(InventoryContract.InventoryTable.QUANTITY, AddProductActivity.this.quantity);
                     values.put(InventoryContract.InventoryTable.PRICE, Integer.parseInt(price));
                     //TODO dummy image processing now
+
                     values.put(InventoryContract.InventoryTable.IMAGE, "test.jpg");
                     Uri uri = getContentResolver().insert(InventoryContract.INVENTORY_PRODUCT, values);
                     if (uri != null) {
